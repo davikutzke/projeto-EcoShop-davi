@@ -1,0 +1,2189 @@
+
+ecoshop.html
+
+100%
+Pular para o conteúdo principal
+Ctrl+J
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ecoshop.html
+
+
+
+arquivos
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoShop — Marketplace Sustentável</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: #f8fafc;
+  color: #1e293b;
+}
+
+/* HEADER */
+header {
+  background: #ffffff;
+  padding: 16px 6%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  color: #15803d;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: -0.5px;
+}
+
+.search-box {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search {
+  width: 100%;
+  padding: 12px 20px 12px 42px;
+  border: 1px solid #cbd5e1;
+  border-radius: 30px;
+  font-size: 15px;
+  outline: none;
+  transition: all .2s;
+}
+
+.search:focus {
+  border-color: #16a34a;
+  box-shadow: 0 0 0 4px rgba(22,163,74,0.15);
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  color: #94a3b8;
+  font-size: 16px;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 18px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all .2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-secondary {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.btn-secondary:hover {
+  background: #e2e8f0;
+}
+
+.primary, .cart {
+  background: #16a34a;
+  color: white;
+}
+
+.primary:hover, .cart:hover {
+  background: #15803d;
+}
+
+.btn-admin {
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.btn-admin:hover {
+  background: #1e293b;
+}
+
+.badge {
+  background: #ffffff;
+  color: #16a34a;
+  border-radius: 20px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* MAIN CONTENT */
+main {
+  max-width: 1280px;
+  margin: auto;
+  padding: 30px 5%;
+}
+
+/* HERO SECTION */
+.hero {
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  border-radius: 24px;
+  padding: 40px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 25px -5px rgba(22,163,74,0.1);
+}
+
+.hero-text {
+  max-width: 600px;
+}
+
+.hero h1 {
+  font-size: 38px;
+  color: #092e20;
+  margin-bottom: 12px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.hero p {
+  color: #166534;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.stat-item b {
+  font-size: 20px;
+  color: #092e20;
+  display: block;
+}
+
+.stat-item span {
+  font-size: 13px;
+  color: #15803d;
+}
+
+/* CONTROLES E FILTROS */
+.filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.categories {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.category {
+  background: white;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.category:hover {
+  border-color: #16a34a;
+  color: #16a34a;
+}
+
+.category.active {
+  background: #16a34a;
+  color: white;
+  border-color: #16a34a;
+}
+
+.sort-select {
+  padding: 9px 15px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  color: #334155;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+}
+
+/* GRID DE PRODUTOS */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 22px;
+}
+
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 14px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  cursor: pointer;
+  transition: all .25s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+}
+
+.img-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f8fafc;
+  margin-bottom: 12px;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tag-condition {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(15,23,42,0.75);
+  color: white;
+  padding: 4px 9px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.card-body h3 {
+  font-size: 16px;
+  color: #0f172a;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rating {
+  font-size: 13px;
+  color: #f59e0b;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rating span {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.price {
+  font-size: 21px;
+  font-weight: 800;
+  color: #16a34a;
+}
+
+.old-price {
+  font-size: 13px;
+  color: #94a3b8;
+  text-decoration: line-through;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.actions .add {
+  flex: 1;
+}
+
+/* MODAIS */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,0.6);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.overlay.show {
+  display: flex;
+}
+
+.modal {
+  background: white;
+  border-radius: 24px;
+  padding: 28px;
+  width: min(680px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+}
+
+.close {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  border-radius: 50%;
+  font-size: 18px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f5f9;
+  color: #64748b;
+  border: none;
+  cursor: pointer;
+}
+
+.close:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 4px;
+}
+
+.modal input, .modal select {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+}
+
+.modal input:focus, .modal select:focus {
+  border-color: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22,163,74,0.1);
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.full {
+  width: 100%;
+  margin-top: 12px;
+  padding: 14px;
+  font-size: 16px;
+  justify-content: center;
+}
+
+/* AUTH TABS & SELECTOR */
+.auth-tabs {
+  display: flex;
+  border-bottom: 2px solid #e2e8f0;
+  margin-bottom: 20px;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 12px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-weight: 700;
+  font-size: 15px;
+  color: #64748b;
+  border-radius: 0;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.auth-tab.active {
+  color: #16a34a;
+  border-bottom-color: #16a34a;
+}
+
+.role-selector {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.role-option {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  background: #f8fafc;
+  text-align: center;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  color: #475569;
+}
+
+.role-option.active {
+  border-color: #16a34a;
+  background: #f0fdf4;
+  color: #15803d;
+}
+
+/* PAINEL DE ADMIN EXCLUSIVO */
+.admin-badge-head {
+  display: inline-block;
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.admin-section {
+  margin-top: 20px;
+}
+
+.admin-section h3 {
+  font-size: 16px;
+  color: #0f172a;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.admin-table th {
+  background: #f8fafc;
+  padding: 10px 12px;
+  text-align: left;
+  color: #475569;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.admin-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+}
+
+.admin-table tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-stat-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+}
+
+.admin-stat-card b {
+  font-size: 22px;
+  color: #15803d;
+  display: block;
+}
+
+.admin-stat-card span {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.admin-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 10px;
+}
+
+.admin-tab {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.admin-tab:hover {
+  background: #e2e8f0;
+}
+
+.admin-tab.active {
+  background: #0f172a;
+  color: white;
+}
+
+.admin-panel {
+  display: none;
+}
+
+.admin-panel.active {
+  display: block;
+}
+
+.btn-danger {
+  background: #fef2f2;
+  color: #991b1b;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.btn-danger:hover {
+  background: #fecaca;
+}
+
+.btn-sm {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.admin-toolbar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.admin-search {
+  flex: 1;
+  min-width: 160px;
+  padding: 9px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 13px;
+  outline: none;
+}
+
+.admin-search:focus {
+  border-color: #16a34a;
+}
+
+.product-thumb {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #f1f5f9;
+}
+
+/* CARRINHO */
+.cart-item {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid #f1f5f9;
+  align-items: center;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+.cart-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.cart-item-info h4 {
+  font-size: 14px;
+  color: #0f172a;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cart-item-info .cart-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: #16a34a;
+}
+
+.qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qty-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.qty-btn:hover {
+  background: #e2e8f0;
+}
+
+.qty-value {
+  font-weight: 700;
+  min-width: 24px;
+  text-align: center;
+}
+
+.btn-remove {
+  background: #fef2f2;
+  color: #991b1b;
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+.btn-remove:hover {
+  background: #fecaca;
+}
+
+.cart-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: #64748b;
+}
+
+.cart-empty span {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.cart-summary {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 2px solid #e2e8f0;
+}
+
+.cart-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.cart-total-row span {
+  font-size: 15px;
+  color: #64748b;
+}
+
+.cart-total-row b {
+  font-size: 24px;
+  color: #16a34a;
+}
+
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0f172a;
+  color: white;
+  padding: 14px 24px;
+  border-radius: 30px;
+  z-index: 300;
+  display: none;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.toast.show {
+  display: block;
+  animation: fadeInUp .3s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translate(-50%, 20px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+footer {
+  text-align: center;
+  padding: 40px;
+  color: #64748b;
+  font-size: 14px;
+  border-top: 1px solid #e2e8f0;
+  margin-top: 50px;
+}
+
+/* DETALHE DO PRODUTO */
+.product-detail {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.product-detail-img {
+  width: 100%;
+  max-width: 280px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 16px;
+  background: #f8fafc;
+}
+
+.product-detail-info {
+  flex: 1;
+  min-width: 220px;
+}
+
+.product-detail-info h2 {
+  font-size: 22px;
+  color: #0f172a;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.product-detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.product-detail-meta span {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.product-detail-meta .cond {
+  background: #0f172a;
+  color: white;
+}
+
+.product-detail-meta .cat {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.product-detail-desc {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.65;
+  margin: 14px 0 18px;
+}
+
+.product-detail-prices {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.product-detail-prices .price {
+  font-size: 28px;
+}
+
+.img-container {
+  cursor: pointer;
+}
+
+.img-container:hover .product-image {
+  transform: scale(1.04);
+  transition: transform .25s ease;
+}
+
+.product-image {
+  transition: transform .25s ease;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🌱 EcoShop</div>
+
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input id="search" class="search" placeholder="Buscar produtos...">
+  </div>
+
+  <div class="nav-actions">
+    <button id="sellBtn" class="btn-secondary">➕ Vender</button>
+    <button id="loginBtn" class="btn-secondary">👤 Entrar</button>
+    <button id="adminPanelBtn" class="btn-admin" style="display: none;">🔒 Painel do ADM</button>
+    <button id="cartBtn" class="cart">
+      🛒 Carrinho <span id="cartCount" class="badge">0</span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Economize até 70% reutilizando com garantia.</h1>
+      <p>Dê uma segunda vida a eletrônicos, vestuário e equipamentos. Bom para o seu bolso, sustentável para o planeta.</p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <b>+54 Produtos</b>
+          <span>Disponíveis agora</span>
+        </div>
+        <div class="stat-item">
+          <b>18t CO₂</b>
+          <span>Evitados este mês</span>
+        </div>
+        <div class="stat-item">
+          <b>4.9 ★</b>
+          <span>Satisfação geral</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="filter-bar">
+    <div class="categories">
+      <button class="category active" data-category="Todos">Todos</button>
+      <button class="category" data-category="Eletrônicos">💻 Eletrônicos</button>
+      <button class="category" data-category="Calçados">👟 Calçados</button>
+      <button class="category" data-category="Games">🎮 Games</button>
+      <button class="category" data-category="Bicicletas">🚲 Bicicletas</button>
+      <button class="category" data-category="Outros">📦 Outros</button>
+    </div>
+
+    <select id="sortSelect" class="sort-select">
+      <option value="featured">Relevância</option>
+      <option value="price-asc">Menor Preço</option>
+      <option value="price-desc">Maior Preço</option>
+      <option value="rating">Melhor Avaliados</option>
+    </select>
+  </div>
+
+  <div id="productsGrid" class="grid"></div>
+</main>
+
+<footer>
+  🌱 <b>EcoShop Marketplace</b> — Promovendo a economia circular desde 2026. Todos os direitos reservados.
+</footer>
+
+<!-- MODAL AUTENTICAÇÃO -->
+<div class="overlay" id="loginModal">
+  <div class="modal">
+    <button class="close" data-close="loginModal">×</button>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLogin">Entrar</button>
+      <button class="auth-tab" id="tabRegister">Criar Conta</button>
+    </div>
+
+    <!-- PAINEL ENTRAR -->
+    <div id="panelLogin">
+      <label style="font-size: 11px; font-weight: 800; color: #64748b; letter-spacing: 0.5px; display: block; margin-bottom: 6px;">TIPO DE ACESSO</label>
+      <div class="role-selector">
+        <div class="role-option active" data-login-type="user">👤 Cliente / Vendedor</div>
+        <div class="role-option" data-login-type="admin">🔐 Administrador</div>
+      </div>
+
+      <div class="form-group">
+        <label>E-mail *</label>
+        <input id="loginEmail" type="email" placeholder="seuemail@exemplo.com">
+      </div>
+
+      <div class="form-group">
+        <label>Senha *</label>
+        <input id="loginPassword" type="password" placeholder="••••••••">
+      </div>
+
+      <button id="loginSubmit" class="primary full">Acessar Conta</button>
+    </div>
+
+    <!-- PAINEL CRIAR CONTA -->
+    <div id="panelRegister" style="display: none;">
+      <label style="font-size: 11px; font-weight: 800; color: #64748b; letter-spacing: 0.5px; display: block; margin-bottom: 6px;">QUERO ME CADASTRAR COMO</label>
+      <div class="role-selector">
+        <div class="role-option active" data-register-type="cliente">🛒 Cliente</div>
+        <div class="role-option" data-register-type="vendedor">🏪 Vendedor</div>
+      </div>
+
+      <div class="form-group">
+        <label>Nome Completo *</label>
+        <input id="regName" placeholder="Ex: Maria Silva">
+      </div>
+
+      <div class="form-group">
+        <label>E-mail *</label>
+        <input id="regEmail" type="email" placeholder="seuemail@exemplo.com">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label id="regDocLabel">CPF *</label>
+          <input id="regDoc" placeholder="000.000.000-00">
+        </div>
+        <div class="form-group">
+          <label>Celular / WhatsApp *</label>
+          <input id="regPhone" placeholder="(11) 99999-9999">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Criar Senha *</label>
+        <input id="regPassword" type="password" placeholder="••••••••">
+      </div>
+
+      <button id="regSubmit" class="primary full">Cadastrar Minha Conta</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL EXCLUSIVO DO ADMINISTRADOR -->
+<div class="overlay" id="adminModal">
+  <div class="modal" style="width: min(900px, 100%);">
+    <button class="close" data-close="adminModal">×</button>
+    
+    <span class="admin-badge-head">🛡️ Painel Restrito — Acesso Master</span>
+    <h2>Gestão Administrativa EcoShop</h2>
+    <p style="font-size: 13px; color: #64748b; margin-bottom: 12px;">Acesso restrito aos administradores: <b>davikutzke@gmail.com</b> e <b>luizbraga@gmail.com</b>.</p>
+
+    <!-- ABAS DO ADM -->
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-admin-tab="overview">📈 Visão Geral</button>
+      <button class="admin-tab" data-admin-tab="products">📦 Produtos</button>
+      <button class="admin-tab" data-admin-tab="sales">📊 Vendas</button>
+      <button class="admin-tab" data-admin-tab="clients">👥 Clientes</button>
+      <button class="admin-tab" data-admin-tab="sellers">🏪 Vendedores</button>
+    </div>
+
+    <!-- PAINEL: VISÃO GERAL -->
+    <div class="admin-panel active" id="adminPanelOverview">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 18px;">
+        <div class="admin-stat-card">
+          <b id="adminTotalSales">R$ 0,00</b>
+          <span>Faturamento Total</span>
+        </div>
+        <div class="admin-stat-card">
+          <b id="adminTotalOrders">0</b>
+          <span>Vendas Realizadas</span>
+        </div>
+        <div class="admin-stat-card">
+          <b id="adminTotalClients">0</b>
+          <span>Clientes Cadastrados</span>
+        </div>
+        <div class="admin-stat-card">
+          <b id="adminTotalSellers">0</b>
+          <span>Vendedores Ativos</span>
+        </div>
+        <div class="admin-stat-card">
+          <b id="adminTotalProducts">0</b>
+          <span>Produtos na Vitrine</span>
+        </div>
+      </div>
+      <div class="admin-section">
+        <h3>🕒 Últimas Vendas</h3>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Cliente</th>
+              <th>Valor</th>
+              <th>Pagamento</th>
+              <th>Data</th>
+            </tr>
+          </thead>
+          <tbody id="adminRecentSales"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PAINEL: PRODUTOS -->
+    <div class="admin-panel" id="adminPanelProducts">
+      <div class="admin-toolbar">
+        <input id="adminProductSearch" class="admin-search" placeholder="Buscar produto...">
+        <button id="adminRefreshProducts" class="btn-secondary btn-sm">🔄 Atualizar</button>
+      </div>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Produto</th>
+            <th>Categoria</th>
+            <th>Preço</th>
+            <th>Condição</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="adminProductsTable"></tbody>
+      </table>
+    </div>
+
+    <!-- PAINEL: VENDAS -->
+    <div class="admin-panel" id="adminPanelSales">
+      <div class="admin-toolbar">
+        <input id="adminSalesSearch" class="admin-search" placeholder="Buscar venda...">
+      </div>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID Pedido</th>
+            <th>Cliente</th>
+            <th>Vendedor</th>
+            <th>Valor</th>
+            <th>Pagamento</th>
+            <th>Data</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="adminSalesTable"></tbody>
+      </table>
+    </div>
+
+    <!-- PAINEL: CLIENTES -->
+    <div class="admin-panel" id="adminPanelClients">
+      <div class="admin-toolbar">
+        <input id="adminClientsSearch" class="admin-search" placeholder="Buscar cliente...">
+      </div>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Nome Completo</th>
+            <th>E-mail</th>
+            <th>CPF</th>
+            <th>Telefone</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="adminClientsTable"></tbody>
+      </table>
+    </div>
+
+    <!-- PAINEL: VENDEDORES -->
+    <div class="admin-panel" id="adminPanelSellers">
+      <div class="admin-toolbar">
+        <input id="adminSellersSearch" class="admin-search" placeholder="Buscar vendedor...">
+      </div>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Vendedor / Loja</th>
+            <th>E-mail</th>
+            <th>CNPJ/CPF</th>
+            <th>Total Vendido</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="adminSellersTable"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DO CARRINHO -->
+<div class="overlay" id="cartModal">
+  <div class="modal" style="width: min(520px, 100%);">
+    <button class="close" data-close="cartModal">×</button>
+
+    <!-- ETAPA 1: ITENS DO CARRINHO -->
+    <div id="cartStepItems">
+      <h2 style="margin-bottom: 6px;">🛒 Seu Carrinho</h2>
+      <p style="font-size: 13px; color: #64748b; margin-bottom: 16px;">Revise os itens antes de finalizar a compra.</p>
+
+      <div id="cartItems"></div>
+
+      <div id="cartSummary" class="cart-summary" style="display: none;">
+        <div class="cart-total-row">
+          <span>Total</span>
+          <b id="cartTotal">R$ 0,00</b>
+        </div>
+        <button id="checkoutBtn" class="primary full">➡️ Continuar para Pagamento</button>
+      </div>
+    </div>
+
+    <!-- ETAPA 2: DADOS DE ENTREGA E PAGAMENTO -->
+    <div id="cartStepPayment" style="display: none;">
+      <h2 style="margin-bottom: 6px;">📦 Dados de Entrega</h2>
+      <p style="font-size: 13px; color: #64748b; margin-bottom: 16px;">Preencha seus dados para concluir a compra.</p>
+
+      <div class="form-group">
+        <label>Nome Completo *</label>
+        <input id="payName" type="text" placeholder="Ex: Maria Silva">
+      </div>
+
+      <div class="form-group">
+        <label>CPF *</label>
+        <input id="payCpf" type="text" placeholder="000.000.000-00" maxlength="14">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>CEP *</label>
+          <input id="payCep" type="text" placeholder="00000-000" maxlength="9">
+        </div>
+        <div class="form-group">
+          <label>Número</label>
+          <input id="payNumber" type="text" placeholder="123">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Endereço Completo *</label>
+        <input id="payAddress" type="text" placeholder="Rua, bairro, cidade - UF">
+      </div>
+
+      <div class="form-group">
+        <label>Forma de Pagamento *</label>
+        <select id="payMethod">
+          <option value="">Selecione...</option>
+          <option value="PIX">PIX</option>
+          <option value="Cartão de Crédito">Cartão de Crédito</option>
+          <option value="Cartão de Débito">Cartão de Débito</option>
+          <option value="Boleto">Boleto Bancário</option>
+        </select>
+      </div>
+
+      <div class="cart-total-row" style="margin-top: 8px; margin-bottom: 12px;">
+        <span>Total a pagar</span>
+        <b id="payTotal">R$ 0,00</b>
+      </div>
+
+      <div style="display: flex; gap: 10px;">
+        <button id="backToCartBtn" class="btn-secondary" style="flex: 1; justify-content: center;">← Voltar</button>
+        <button id="confirmPayBtn" class="primary" style="flex: 2; justify-content: center;">✅ Confirmar Compra</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DETALHE DO PRODUTO -->
+<div class="overlay" id="productModal">
+  <div class="modal" style="width: min(720px, 100%);">
+    <button class="close" data-close="productModal">×</button>
+    <div id="productDetailContent" class="product-detail">
+      <!-- preenchido via JS -->
+    </div>
+  </div>
+</div>
+
+<!-- MODAL VENDER PRODUTO -->
+<div class="overlay" id="sellModal">
+  <div class="modal" style="width: min(560px, 100%);">
+    <button class="close" data-close="sellModal">×</button>
+    <h2 style="margin-bottom: 6px;">➕ Anunciar Produto</h2>
+    <p style="font-size: 13px; color: #64748b; margin-bottom: 18px;">Preencha os dados do item que deseja vender no EcoShop.</p>
+
+    <div class="form-group">
+      <label>Nome do Produto *</label>
+      <input id="sellName" type="text" placeholder="Ex: Notebook Dell Inspiron 15">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Categoria *</label>
+        <select id="sellCategory">
+          <option value="">Selecione...</option>
+          <option value="Eletrônicos">💻 Eletrônicos</option>
+          <option value="Calçados">👟 Calçados</option>
+          <option value="Games">🎮 Games</option>
+          <option value="Bicicletas">🚲 Bicicletas</option>
+          <option value="Outros">📦 Outros</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Condição *</label>
+        <select id="sellCondition">
+          <option value="">Selecione...</option>
+          <option value="Seminovo">Seminovo</option>
+          <option value="Usado - Excelente">Usado - Excelente</option>
+          <option value="Usado - Bom">Usado - Bom</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Preço de Venda (R$) *</label>
+        <input id="sellPrice" type="number" min="1" step="0.01" placeholder="Ex: 499.90">
+      </div>
+      <div class="form-group">
+        <label>Preço Original (R$)</label>
+        <input id="sellOldPrice" type="number" min="1" step="0.01" placeholder="Ex: 899.00">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>URL da Imagem</label>
+      <input id="sellImage" type="url" placeholder="https://... (opcional — usamos uma padrão se vazio)">
+    </div>
+
+    <div class="form-group">
+      <label>Descrição do Produto</label>
+      <input id="sellDesc" type="text" placeholder="Breve descrição do estado e características">
+    </div>
+
+    <button id="sellSubmit" class="primary full">🚀 Publicar Anúncio</button>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* CREDENCIAIS ÚNICAS DO ADM */
+const ADMIN_ACCOUNTS = [
+  { email: "davikutzke@gmail.com", senha: "coxa1909", nome: "Davi" },
+  { email: "luizbraga@gmail.com", senha: "coxa1909", nome: "Luiz" }
+];
+
+function findAdmin(email, senha) {
+  return ADMIN_ACCOUNTS.find(
+    a => a.email.toLowerCase() === email && a.senha === senha
+  ) || null;
+}
+
+function isAdminEmail(email) {
+  return ADMIN_ACCOUNTS.some(a => a.email.toLowerCase() === email);
+}
+
+let isAdminLoggedIn = false;
+let currentCategory = "Todos";
+let cart = []; // { id, qty }
+
+/* DADOS INTERNOS EXCLUSIVOS DO ADM */
+const adminData = {
+  vendas: [
+    { id: "#PED-8801", cliente: "Ana Paula Silva", vendedor: "TechReuse SP", valor: "R$ 1.499,90", pagamento: "PIX", data: "21/09/2026" },
+    { id: "#PED-8802", cliente: "Carlos Eduardo Costa", vendedor: "Urban Footwear", valor: "R$ 209,90", pagamento: "Cartão", data: "20/09/2026" },
+    { id: "#PED-8803", cliente: "Juliana Mendes", vendedor: "Games Retro Brasil", valor: "R$ 189,90", pagamento: "PIX", data: "19/09/2026" },
+    { id: "#PED-8804", cliente: "Fernando Oliveira", vendedor: "EcoBikes Curitiba", valor: "R$ 699,90", pagamento: "Boleto", data: "18/09/2026" },
+    { id: "#PED-8805", cliente: "Beatriz Lima", vendedor: "Vision Tech", valor: "R$ 849,00", pagamento: "PIX", data: "17/09/2026" },
+    { id: "#PED-8806", cliente: "Lucas Martins", vendedor: "Vintage Wear", valor: "R$ 159,90", pagamento: "Cartão", data: "16/09/2026" },
+    { id: "#PED-8807", cliente: "Rodrigo Santos", vendedor: "Smart Device Outlet", valor: "R$ 1.899,00", pagamento: "PIX", data: "15/09/2026" },
+    { id: "#PED-8808", cliente: "Camila Rocha", vendedor: "EcoMove Brasil", valor: "R$ 1.250,00", pagamento: "Cartão", data: "14/09/2026" }
+  ],
+  clientes: [
+    { nome: "Ana Paula Silva", email: "anapaula@gmail.com", cpf: "102.394.889-01", fone: "(11) 98823-1102" },
+    { nome: "Carlos Eduardo Costa", email: "carlos.costa@hotmail.com", cpf: "220.391.009-44", fone: "(41) 99122-3049" },
+    { nome: "Juliana Mendes", email: "ju.mendes@outlook.com", cpf: "091.223.841-12", fone: "(21) 97102-3390" },
+    { nome: "Fernando Oliveira", email: "fer.oliveira@gmail.com", cpf: "441.029.381-00", fone: "(41) 98877-2211" },
+    { nome: "Beatriz Lima", email: "bia.lima@gmail.com", cpf: "332.118.990-11", fone: "(31) 99233-8811" },
+    { nome: "Lucas Martins", email: "lucas.m@gmail.com", cpf: "554.019.228-77", fone: "(11) 97722-1100" },
+    { nome: "Rodrigo Santos", email: "rodrigo.s@gmail.com", cpf: "882.102.391-44", fone: "(19) 98112-4455" },
+    { nome: "Camila Rocha", email: "camila.rocha@yahoo.com", cpf: "119.302.884-22", fone: "(81) 99401-2299" }
+  ],
+  vendedores: [
+    { nome: "TechReuse SP", email: "contato@techreuse.com.br", doc: "33.109.283/0001-90", totalVendas: "R$ 8.450,00" },
+    { nome: "Urban Footwear", email: "vendas@urbanfoot.com", doc: "21.902.112/0001-02", totalVendas: "R$ 3.120,00" },
+    { nome: "Games Retro Brasil", email: "retro@gamesbrasil.com", doc: "09.112.984/0001-77", totalVendas: "R$ 1.890,00" },
+    { nome: "EcoBikes Curitiba", email: "atendimento@ecobikes.com", doc: "14.882.901/0001-33", totalVendas: "R$ 1.390,00" },
+    { nome: "Vision Tech", email: "vendas@visiontech.com", doc: "45.102.991/0001-88", totalVendas: "R$ 2.100,00" },
+    { nome: "Vintage Wear", email: "contato@vintagewear.com", doc: "18.332.001/0001-44", totalVendas: "R$ 1.340,00" },
+    { nome: "Smart Device Outlet", email: "outlet@smartdevice.com", doc: "72.104.551/0001-12", totalVendas: "R$ 4.390,00" },
+    { nome: "EcoMove Brasil", email: "contato@ecomove.com.br", doc: "31.904.221/0001-65", totalVendas: "R$ 2.210,00" }
+  ]
+};
+
+/* CATÁLOGO COMPLETO AMPLIADO COM 54 PRODUTOS */
+const products = {
+  "1": { name: "Notebook EcoBook Pro 14\"", price: 1499.90, oldPrice: 2100.00, category: "Eletrônicos", condition: "Seminovo", rating: 4.8, reviews: 32, image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=900&q=85" },
+  "2": { name: "Tênis Urban Eco Knit", price: 209.90, oldPrice: 299.90, category: "Calçados", condition: "Usado - Excelente", rating: 4.7, reviews: 18, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85" },
+  "3": { name: "Controle Wireless Xbox Series", price: 189.90, oldPrice: 350.00, category: "Games", condition: "Seminovo", rating: 4.9, reviews: 45, image: "https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=900&q=85" },
+  "4": { name: "Bicicleta Urbana Retrô 7V", price: 699.90, oldPrice: 1100.00, category: "Bicicletas", condition: "Usado - Excelente", rating: 4.6, reviews: 12, image: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=900&q=85" },
+  "5": { name: "Monitor Gamer LED 24\" 144Hz", price: 849.00, oldPrice: 1299.00, category: "Eletrônicos", condition: "Seminovo", rating: 4.9, reviews: 28, image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=900&q=85" },
+  "6": { name: "Jaqueta Jeans Vintage Eco", price: 159.90, oldPrice: 280.00, category: "Outros", condition: "Usado - Bom", rating: 4.5, reviews: 14, image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=900&q=85" },
+  "7": { name: "Câmera Mirrorless 4K Compacta", price: 2199.00, oldPrice: 3400.00, category: "Eletrônicos", condition: "Seminovo", rating: 5.0, reviews: 9, image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=900&q=85" },
+  "8": { name: "Skate Longboard Bamboo Pro", price: 249.90, oldPrice: 420.00, category: "Outros", condition: "Usado - Excelente", rating: 4.8, reviews: 22, image: "https://images.unsplash.com/photo-1547447134-cd3f5c716030?auto=format&fit=crop&w=900&q=85" },
+  "9": { name: "Headset Bluetooth Noise Cancelling", price: 320.00, oldPrice: 580.00, category: "Eletrônicos", condition: "Seminovo", rating: 4.7, reviews: 37, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=85" },
+  "10": { name: "Console Playstation 4 Slim 1TB", price: 1190.00, oldPrice: 1800.00, category: "Games", condition: "Usado - Excelente", rating: 4.8, reviews: 50, image: "https://images.unsplash.com/photo-1507457379470-08b800bebc67?auto=format&fit=crop&w=900&q=85" },
+  "11": { name: "Smartphone EcoTalk 128GB OLED", price: 1899.00, oldPrice: 2800.00, category: "Eletrônicos", condition: "Seminovo", rating: 4.9, reviews: 41, image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=85" },
+  "12": { name: "Violão Acústico Nylon Vintage", price: 380.00, oldPrice: 650.00, category: "Outros", condition: "Usado - Bom", rating: 4.6, reviews: 16, image: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=900&q=85" },
+  "13": { name: "Smartwatch Fitness Pulse HR", price: 299.00, oldPrice: 499.00, category: "Eletrônicos", condition: "Seminovo", rating: 4.7, reviews: 29, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=85" },
+  "14": { name: "Cadeira Ergonômica de Escritório", price: 450.00, oldPrice: 890.00, category: "Outros", condition: "Usado - Excelente", rating: 4.8, reviews: 19, image: "https://images.unsplash.com/photo-1580481072645-022f9a6d8310?auto=format&fit=crop&w=900&q=85" },
+  "15": { name: "Tablet Stylus Pen 10.5\"", price: 920.00, oldPrice: 1450.00, category: "Eletrônicos", condition: "Seminovo", rating: 4.8, reviews: 23, image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=900&q=85" },
+  "16": { name: "Patinete Elétrico Dobrável 250W", price: 1250.00, oldPrice: 1990.00, category: "Bicicletas", condition: "Usado - Excelente", rating: 4.7, reviews: 15, image: "https://images.unsplash.com/photo-1597082683410-11254b4d4202?auto=format&fit=crop&w=900&q=85" },
+  "17": { name: "Bota Couro Ecológico Outdoor", price: 289.90, oldPrice: 420.00, category: "Calçados", condition: "Seminovo", rating: 4.9, reviews: 31, image: "https://images.unsplash.com/photo-1520639888713-7851133b1ed0?auto=format&fit=crop&w=900&q=85" },
+  "18": { name: "Jogo Nintendo Switch Legend", price: 210.00, oldPrice: 349.00, category: "Games", condition: "Usado - Excelente", rating: 5.0, reviews: 62, image: "https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?auto=format&fit=crop&w=900&q=85" },
+  "19": { name: "Caixa de Som Bluetooth Impermeável", price: 179.90, oldPrice: 280.00, category: "Eletrônicos", condition: "Seminovo", rating: 4.6, reviews: 24, image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=900&q=85" },
+  "20": { name: "Teclado Mecânico RGB Switch Red", price: 220.00, oldPrice: 390.00, category: "Eletrônicos", condition: "Usado - Excelente", rating: 4.8, reviews: 19, image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=900&q=85" },
+  "21": { name: "Óculos de Sol Sustentável Bambu", price: 89.90, oldPrice: 160.00, category: "Outros", condition: "Seminovo", rating: 4.7, reviews: 13, image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=900&q=85" },
+  "22": { name: "Mountain Bike Aro 29 Freio a Disco", price: 1150.00, oldPrice: 1890.00, category: "Bicicletas", condition: "Usado - Excelente", rating: 4.9, reviews: 27, image: "https://images.unsplash.com/photo-1576435728678-68d0fbf94e91?auto=format&fit=crop&w=900&q=85" },
+  "23": { name: "Tênis Corrida Performance Eco", price: 249.00, oldPrice: 380.00, category: "Calçados", condition: "Seminovo", rating: 4.8, reviews: 35, image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=900&q=85" },
+  "24": { name: "Óculos VR Headset 2ª Geração", price: 1350.00, oldPrice: 2200.00, category: "Games", condition: "Seminovo", rating: 4.9, reviews: 14, image: "https://images.unsplash.com/photo-1622979135225-d2ba269bc1bd?auto=format&fit=crop&w=900&q=85" },
+  "25": { name: "Mochila Impermeável Garrafa PET", price: 129.90, oldPrice: 210.00, category: "Outros", condition: "Usado - Excelente", rating: 4.6, reviews: 20, image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85" },
+  "26": { name: "Drone Compacto 1080p HD", price: 580.00, oldPrice: 950.00, category: "Eletrônicos", condition: "Seminovo", rating: 4.5, reviews: 16, image: "https://images.unsplash.com/photo-1507582020474-9a35b7d455d9?auto=format&fit=crop&w=900&q=85" },
+  "27": { name: "Cadeira Gamer Ergonomia Pro", price: 620.00, oldPrice: 1100.00, category: "Games", condition: "Usado - Bom", rating: 4.7, reviews: 22, image: "https://images.unsplash.com/photo-1598550476439-6847785fcea6?auto=format&fit=crop&w=900&q=85" },
+  "28": { name: "Capacete Ciclismo Aerodinâmico", price: 95.00, oldPrice: 160.00, category: "Bicicletas", condition: "Seminovo", rating: 4.8, reviews: 11, image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=900&q=85" },
+  "29": { name: "Sapatênis Casual Couro Vegano", price: 169.90, oldPrice: 260.00, category: "Calçados", condition: "Seminovo", rating: 4.6, reviews: 17, image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=900&q=85" },
+  "30": { name: "Kindle Paperwhite 8GB Tela 6\"", price: 349.00, oldPrice: 550.00, category: "Eletrônicos", condition: "Usado - Excelente", rating: 4.9, reviews: 54, image: "https://images.unsplash.com/photo-1592496001020-d31bd830651f?auto=format&fit=crop&w=900&q=85" },
+  "31": { name: "Microfone Condensador USB Studio", price: 195.00, oldPrice: 320.00, category: "Eletrônicos", condition: "Seminovo", rating: 4.8, reviews: 21, image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=900&q=85" },
+  "32": { name: "Moedor de Café Manual Inox", price: 75.00, oldPrice: 130.00, category: "Outros", condition: "Seminovo", rating: 4.7, reviews: 15, image: "https://images.unsplash.com/photo-1589396575653-c09c794ff6a6?auto=format&fit=crop&w=900&q=85" },
+  "33": { name: "Guitarra Elétrica Stratocaster", price: 780.00, oldPrice: 1300.00, category: "Outros", condition: "Usado - Excelente", rating: 4.9, reviews: 26, image: "https://images.unsplash.com/photo-1550291652-6ea9114a47b1?auto=format&fit=crop&w=900&q=85" },
+  "34": { name: "Sandália Anatômica Cortiça Eco", price: 119.90, oldPrice: 190.00, category: "Calçados", condition: "Seminovo", rating: 4.6, reviews: 14, image: "https://images.unsplash.com/photo-1603808033192-082d6919d3e1?auto=format&fit=crop&w=900&q=85" },
+  "35": { name: "Console Nintendo Switch Lite", price: 980.00, oldPrice: 1500.00, category: "Games", condition: "Usado - Excelente", rating: 4.8, reviews: 39, image: "https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?auto=format&fit=crop&w=900&q=85" },
+  "36": { name: "Bicicleta Dobrável Alumínio 6V", price: 890.00, oldPrice: 1400.00, category: "Bicicletas", condition: "Seminovo", rating: 4.7, reviews: 18, image: "https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?auto=format&fit=crop&w=900&q=85" },
+  "37": { name: "Mouse Gamer Sem Fio 16000 DPI", price: 185.00, oldPrice: 290.00, category: "Eletrônicos", condition: "Seminovo", rating: 4.8, reviews: 31, image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=900&q=85" },
+  "38": { name: "Carregador Solar Portátil 20000mAh", price: 140.00, oldPrice: 230.00, category: "Eletrônicos", condition: "Seminovo", rating: 4.5, reviews: 25, image: "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=900&q=85" },
+  "39": { name: "Barraca de Acampamento 3 Pessoas", price: 260.00, oldPrice: 450.00, category: "Outros", condition: "Usado - Bom", rating: 4.6, reviews: 12, image: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=900&q=85" },
+  "40": { name: "Volante Gamer com Pedais PC/PS4", price: 510.00, oldPrice: 890.00, category: "Games", condition: "Usado - Excelente", rating: 4.8, reviews: 17, image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=900&q=85" },
+  "41": { name: "Tênis Skate Low Top Resistente", price: 199.90, oldPrice: 310.00, category: "Calçados", condition: "Seminovo", rating: 4.7, reviews: 28, image: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=900&q=85" },
+  "42": { name: "Trancador de Bike U-Lock Forte", price: 65.00, oldPrice: 110.00, category: "Bicicletas", condition: "Seminovo", rating: 4.9, reviews: 40, image: "https://images.unsplash.com/photo-1584433144859-1fc3ab64a957?auto=format&fit=crop&w=900&q=85" },
+  "43": { name: "Mesa Digitalizadora Desenho USB", price: 210.00, oldPrice: 380.00, category: "Eletrônicos", condition: "Seminovo", rating: 4.8, reviews: 22, image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=900&q=85" },
+  "44": { name: "Processador de Alimentos Manual", price: 45.00, oldPrice: 85.00, category: "Outros", condition: "Seminovo", rating: 4.6, reviews: 10, image: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=900&q=85" },
+  "45": { name: "Lâmpada Smart LED Wi-Fi RGB", price: 49.90, oldPrice: 90.00, category: "Eletrônicos", condition: "Seminovo", rating: 4.8, reviews: 52, image: "https://images.unsplash.com/photo-1550985616-10810253b84d?auto=format&fit=crop&w=900&q=85" },
+  "46": { name: "Bota Masculina Trekking Pro", price: 310.00, oldPrice: 480.00, category: "Calçados", condition: "Usado - Excelente", rating: 4.9, reviews: 19, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85" },
+  "47": { name: "Jogo Board Game Estratégia Catan", price: 180.00, oldPrice: 290.00, category: "Outros", condition: "Usado - Excelente", rating: 5.0, reviews: 38, image: "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?auto=format&fit=crop&w=900&q=85" },
+  "48": { name: "Luvas de Ciclismo Gel Dedeira", price: 39.90, oldPrice: 75.00, category: "Bicicletas", condition: "Seminovo", rating: 4.7, reviews: 16, image: "https://images.unsplash.com/photo-1517649763962-0c623266010b?auto=format&fit=crop&w=900&q=85" },
+  "49": { name: "Soundbar Bluetooth TV 120W", price: 430.00, oldPrice: 750.00, category: "Eletrônicos", condition: "Seminovo", rating: 4.7, reviews: 23, image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=900&q=85" },
+  "50": { name: "Mini Fliperama Retro 3000 Jogos", price: 390.00, oldPrice: 650.00, category: "Games", condition: "Usado - Excelente", rating: 4.9, reviews: 44, image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=900&q=85" },
+  "51": { name: "Farol LED Recarregável para Bike", price: 42.00, oldPrice: 80.00, category: "Bicicletas", condition: "Seminovo", rating: 4.8, reviews: 33, image: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=900&q=85" },
+  "52": { name: "Chinelo Eco Fibra de Coco", price: 59.90, oldPrice: 99.00, category: "Calçados", condition: "Seminovo", rating: 4.5, reviews: 12, image: "https://images.unsplash.com/photo-1603808033192-082d6919d3e1?auto=format&fit=crop&w=900&q=85" },
+  "53": { name: "MacMini Computador Compacto", price: 2100.00, oldPrice: 3500.00, category: "Eletrônicos", condition: "Seminovo", rating: 5.0, reviews: 15, image: "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?auto=format&fit=crop&w=900&q=85" },
+  "54": { name: "Mala de Viagem Executiva Reciclada", price: 230.00, oldPrice: 410.00, category: "Outros", condition: "Usado - Excelente", rating: 4.8, reviews: 21, image: "https://images.unsplash.com/photo-1565026057447-b88e3f29d0ae?auto=format&fit=crop&w=900&q=85" }
+};
+
+let currentLoginType = "user";
+let currentRegisterType = "cliente";
+const $ = id => document.getElementById(id);
+const money = val => val.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+function toast(msg){
+  $("toast").textContent = msg;
+  $("toast").classList.add("show");
+  setTimeout(() => $("toast").classList.remove("show"), 2500);
+}
+
+/* DESCRIÇÃO DO PRODUTO */
+function getProductDescription(p) {
+  if (p.desc && p.desc.trim()) return p.desc.trim();
+  const condText = {
+    "Seminovo": "Item seminovo, em ótimo estado de conservação, com sinais mínimos de uso.",
+    "Usado - Excelente": "Produto usado em excelente estado. Funciona perfeitamente e apresenta poucos sinais de desgaste.",
+    "Usado - Bom": "Produto usado em bom estado de funcionamento. Pode apresentar marcas leves de uso, sem afetar o desempenho."
+  };
+  const catText = {
+    "Eletrônicos": "Equipamento eletrônico revisado e testado. Ideal para quem busca qualidade com preço acessível e menor impacto ambiental.",
+    "Calçados": "Calçado selecionado para o marketplace sustentável. Confortável, com boa estrutura e pronto para um novo uso.",
+    "Games": "Item gamer conferido e funcional. Perfeito para quem quer jogar sem pagar o preço de produto novo.",
+    "Bicicletas": "Meio de transporte sustentável e econômico. Revisado, com componentes em bom estado de uso.",
+    "Outros": "Produto reutilizado com cuidado. Uma escolha inteligente para economizar e reduzir o desperdício."
+  };
+  const base = condText[p.condition] || "Produto em bom estado, pronto para uso.";
+  const cat = catText[p.category] || "Produto selecionado para a economia circular.";
+  return `${base} ${cat} Ao comprar no EcoShop você dá uma segunda vida a este item e ajuda a reduzir o desperdício.`;
+}
+
+function openProductDetail(id) {
+  const p = products[id];
+  if (!p) return;
+  const discount = Math.round((1 - p.price / p.oldPrice) * 100);
+  $("productDetailContent").innerHTML = `
+    <img class="product-detail-img" src="${p.image}" alt="${p.name}">
+    <div class="product-detail-info">
+      <h2>${p.name}</h2>
+      <div class="product-detail-meta">
+        <span class="cond">${p.condition}</span>
+        <span class="cat">${p.category}</span>
+        <span>★ ${p.rating} (${p.reviews} avaliações)</span>
+      </div>
+      <p class="product-detail-desc">${getProductDescription(p)}</p>
+      <div class="product-detail-prices">
+        <div class="price">${money(p.price)}</div>
+        <div class="old-price">${money(p.oldPrice)}</div>
+        <span style="font-size:13px;font-weight:700;color:#16a34a;background:#dcfce7;padding:3px 8px;border-radius:8px;">-${discount}%</span>
+      </div>
+      <button class="primary full" id="detailAddBtn" data-add="${id}" style="margin-top:0;">🛒 Adicionar ao Carrinho</button>
+    </div>
+  `;
+  $("detailAddBtn").addEventListener("click", () => {
+    addToCart(id);
+    $("productModal").classList.remove("show");
+  });
+  $("productModal").classList.add("show");
+}
+
+/* ========== CARRINHO ========== */
+function getCartCount() {
+  return cart.reduce((sum, item) => sum + item.qty, 0);
+}
+
+function updateCartBadge() {
+  $("cartCount").textContent = getCartCount();
+}
+
+function addToCart(id) {
+  const existing = cart.find(item => item.id === id);
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    cart.push({ id: id, qty: 1 });
+  }
+  updateCartBadge();
+  toast("✅ Adicionado ao carrinho!");
+}
+
+function changeQty(id, delta) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) {
+    cart = cart.filter(i => i.id !== id);
+  }
+  updateCartBadge();
+  renderCart();
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(i => i.id !== id);
+  updateCartBadge();
+  renderCart();
+  toast("Item removido do carrinho");
+}
+
+function getCartTotal() {
+  return cart.reduce((sum, item) => {
+    const p = products[item.id];
+    return sum + (p ? p.price * item.qty : 0);
+  }, 0);
+}
+
+function renderCart() {
+  const container = $("cartItems");
+  const summary = $("cartSummary");
+
+  if (cart.length === 0) {
+    container.innerHTML = `
+      <div class="cart-empty">
+        <span>🛒</span>
+        <p>Seu carrinho está vazio.</p>
+        <p style="font-size:13px;margin-top:6px;">Adicione produtos para continuar.</p>
+      </div>
+    `;
+    summary.style.display = "none";
+    return;
+  }
+
+  container.innerHTML = cart.map(item => {
+    const p = products[item.id];
+    if (!p) return "";
+    return `
+      <div class="cart-item">
+        <img src="${p.image}" alt="${p.name}">
+        <div class="cart-item-info">
+          <h4>${p.name}</h4>
+          <div class="cart-price">${money(p.price)}</div>
+        </div>
+        <div class="qty-controls">
+          <button class="qty-btn" onclick="window._changeQty('${item.id}', -1)">−</button>
+          <span class="qty-value">${item.qty}</span>
+          <button class="qty-btn" onclick="window._changeQty('${item.id}', 1)">+</button>
+        </div>
+        <button class="btn-remove" onclick="window._removeFromCart('${item.id}')">Remover</button>
+      </div>
+    `;
+  }).join("");
+
+  $("cartTotal").textContent = money(getCartTotal());
+  summary.style.display = "block";
+}
+
+// Expor funções para os botões inline do carrinho
+window._changeQty = changeQty;
+window._removeFromCart = removeFromCart;
+
+$("cartBtn").addEventListener("click", () => {
+  // Sempre volta para a etapa de itens ao abrir o carrinho
+  $("cartStepItems").style.display = "block";
+  $("cartStepPayment").style.display = "none";
+  renderCart();
+  $("cartModal").classList.add("show");
+});
+
+// Máscaras simples de CPF e CEP
+function maskCpf(value) {
+  return value
+    .replace(/\D/g, "")
+    .replace(/(\d{3})(\d)/, "$1.$2")
+    .replace(/(\d{3})(\d)/, "$1.$2")
+    .replace(/(\d{3})(\d{1,2})$/, "$1-$2")
+    .slice(0, 14);
+}
+
+function maskCep(value) {
+  return value
+    .replace(/\D/g, "")
+    .replace(/(\d{5})(\d)/, "$1-$2")
+    .slice(0, 9);
+}
+
+$("payCpf").addEventListener("input", (e) => {
+  e.target.value = maskCpf(e.target.value);
+});
+
+$("payCep").addEventListener("input", (e) => {
+  e.target.value = maskCep(e.target.value);
+});
+
+// Ir para etapa de pagamento
+$("checkoutBtn").addEventListener("click", () => {
+  if (cart.length === 0) return;
+  $("payTotal").textContent = money(getCartTotal());
+  $("cartStepItems").style.display = "none";
+  $("cartStepPayment").style.display = "block";
+});
+
+// Voltar para o carrinho
+$("backToCartBtn").addEventListener("click", () => {
+  $("cartStepPayment").style.display = "none";
+  $("cartStepItems").style.display = "block";
+});
+
+// Confirmar compra
+$("confirmPayBtn").addEventListener("click", () => {
+  const nome = $("payName").value.trim();
+  const cpf = $("payCpf").value.trim();
+  const cep = $("payCep").value.trim();
+  const endereco = $("payAddress").value.trim();
+  const metodo = $("payMethod").value;
+
+  if (!nome || !cpf || !cep || !endereco || !metodo) {
+    toast("⚠️ Preencha todos os campos obrigatórios!");
+    return;
+  }
+
+  if (cpf.replace(/\D/g, "").length !== 11) {
+    toast("⚠️ CPF inválido. Digite os 11 dígitos.");
+    return;
+  }
+
+  if (cep.replace(/\D/g, "").length !== 8) {
+    toast("⚠️ CEP inválido. Digite os 8 dígitos.");
+    return;
+  }
+
+  const totalNum = getCartTotal();
+  const total = money(totalNum);
+  const count = getCartCount();
+  const orderId = "#PED-" + String(8800 + adminData.vendas.length + 1);
+
+  // Registra venda no painel do admin
+  adminData.vendas.unshift({
+    id: orderId,
+    cliente: nome,
+    vendedor: "EcoShop Marketplace",
+    valor: total,
+    valorNum: totalNum,
+    pagamento: metodo,
+    data: new Date().toLocaleDateString("pt-BR")
+  });
+
+  // Registra/atualiza cliente se ainda não existir
+  const cpfClean = cpf.replace(/\D/g, "");
+  const clientExists = adminData.clientes.some(c => c.cpf.replace(/\D/g, "") === cpfClean);
+  if (!clientExists) {
+    adminData.clientes.unshift({
+      nome,
+      email: nome.toLowerCase().replace(/\s+/g, ".") + "@email.com",
+      cpf,
+      fone: "(00) 00000-0000"
+    });
+  }
+
+  // Limpa carrinho e formulário
+  cart = [];
+  updateCartBadge();
+  $("payName").value = "";
+  $("payCpf").value = "";
+  $("payCep").value = "";
+  $("payNumber").value = "";
+  $("payAddress").value = "";
+  $("payMethod").value = "";
+
+  $("cartStepPayment").style.display = "none";
+  $("cartStepItems").style.display = "block";
+  renderCart();
+  $("cartModal").classList.remove("show");
+
+  toast(`🎉 Pedido ${orderId} confirmado! ${count} item(ns) — ${total} via ${metodo}`);
+});
+
+/* AUTENTICAÇÃO E CONTROLE DE ACESSO */
+$("tabLogin").addEventListener("click", () => {
+  $("tabLogin").classList.add("active");
+  $("tabRegister").classList.remove("active");
+  $("panelLogin").style.display = "block";
+  $("panelRegister").style.display = "none";
+});
+
+$("tabRegister").addEventListener("click", () => {
+  $("tabRegister").classList.add("active");
+  $("tabLogin").classList.remove("active");
+  $("panelRegister").style.display = "block";
+  $("panelLogin").style.display = "none";
+});
+
+document.querySelectorAll("[data-login-type]").forEach(opt => {
+  opt.addEventListener("click", () => {
+    document.querySelectorAll("[data-login-type]").forEach(x => x.classList.remove("active"));
+    opt.classList.add("active");
+    currentLoginType = opt.dataset.loginType;
+  });
+});
+
+$("loginSubmit").addEventListener("click", () => {
+  const email = $("loginEmail").value.trim().toLowerCase();
+  const senha = $("loginPassword").value.trim();
+
+  if(!email || !senha) {
+    toast("Preencha e-mail e senha!");
+    return;
+  }
+
+  // Aceita login de admin mesmo se a aba "Cliente" estiver selecionada
+  const admin = findAdmin(email, senha);
+  if (admin) {
+    isAdminLoggedIn = true;
+    currentLoginType = "admin";
+    document.querySelectorAll("[data-login-type]").forEach(x => {
+      x.classList.toggle("active", x.dataset.loginType === "admin");
+    });
+    toast(`🔓 Acesso concedido! Bem-vindo, Administrador ${admin.nome}.`);
+    $("loginBtn").textContent = `👤 ${admin.nome} (ADM)`;
+    $("adminPanelBtn").style.display = "inline-flex";
+    $("loginModal").classList.remove("show");
+    renderAdminTables();
+    return;
+  }
+
+  if (currentLoginType === "admin" || isAdminEmail(email)) {
+    toast("❌ Credenciais inválidas. Use o e-mail e senha de administrador corretos.");
+    return;
+  }
+
+  toast("Bem-vindo(a) ao EcoShop!");
+  $("loginBtn").textContent = "👤 Minha Conta";
+  $("loginModal").classList.remove("show");
+});
+
+$("regSubmit").addEventListener("click", () => {
+  const name = $("regName").value.trim();
+  const email = $("regEmail").value.trim().toLowerCase();
+
+  if(isAdminEmail(email)) {
+    toast("Este e-mail é reservado para administradores.");
+    return;
+  }
+
+  if(!name || !email) {
+    toast("Preencha os campos obrigatórios!");
+    return;
+  }
+
+  toast(`Conta criada com sucesso para ${name}!`);
+  $("loginBtn").textContent = `👤 ${name.split(" ")[0]}`;
+  $("loginModal").classList.remove("show");
+});
+
+/* PAINEL DE DADOS PRIVADOS DO ADM */
+function parseMoneyBR(str) {
+  if (typeof str === "number") return str;
+  if (!str) return 0;
+  return parseFloat(String(str).replace(/[R$\s.]/g, "").replace(",", ".")) || 0;
+}
+
+function updateAdminStats() {
+  const fat = adminData.vendas.reduce((s, v) => s + (v.valorNum != null ? v.valorNum : parseMoneyBR(v.valor)), 0);
+  $("adminTotalSales").textContent = money(fat);
+  $("adminTotalOrders").textContent = String(adminData.vendas.length);
+  $("adminTotalClients").textContent = String(adminData.clientes.length);
+  $("adminTotalSellers").textContent = String(adminData.vendedores.length);
+  $("adminTotalProducts").textContent = String(Object.keys(products).length);
+}
+
+function renderAdminTables() {
+  updateAdminStats();
+
+  // Últimas vendas (visão geral)
+  $("adminRecentSales").innerHTML = adminData.vendas.slice(0, 5).map(v => `
+    <tr>
+      <td><b>${v.id}</b></td>
+      <td>${v.cliente}</td>
+      <td><b>${v.valor}</b></td>
+      <td>${v.pagamento}</td>
+      <td>${v.data}</td>
+    </tr>
+  `).join("") || `<tr><td colspan="5" style="text-align:center;color:#64748b;">Nenhuma venda ainda.</td></tr>`;
+
+  // Produtos
+  renderAdminProducts();
+
+  // Vendas
+  renderAdminSales();
+
+  // Clientes
+  renderAdminClients();
+
+  // Vendedores
+  renderAdminSellers();
+}
+
+function renderAdminProducts(filter = "") {
+  const term = filter.toLowerCase();
+  const keys = Object.keys(products).filter(id => {
+    const p = products[id];
+    return !term || p.name.toLowerCase().includes(term) || p.category.toLowerCase().includes(term);
+  });
+  $("adminProductsTable").innerHTML = keys.map(id => {
+    const p = products[id];
+    return `
+      <tr>
+        <td><img class="product-thumb" src="${p.image}" alt=""></td>
+        <td><b>${p.name}</b></td>
+        <td>${p.category}</td>
+        <td><b>${money(p.price)}</b></td>
+        <td>${p.condition}</td>
+        <td>
+          <button class="btn-danger btn-sm" data-del-product="${id}">🗑️ Remover</button>
+        </td>
+      </tr>
+    `;
+  }).join("") || `<tr><td colspan="6" style="text-align:center;color:#64748b;">Nenhum produto.</td></tr>`;
+
+  $("adminProductsTable").querySelectorAll("[data-del-product]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.delProduct;
+      const nome = products[id]?.name || "Produto";
+      if (!confirm(`Remover "${nome}" da vitrine?`)) return;
+      delete products[id];
+      cart = cart.filter(i => i.id !== id);
+      updateCartBadge();
+      renderAdminProducts($("adminProductSearch").value);
+      updateAdminStats();
+      renderProducts(currentCategory, $("search").value, $("sortSelect").value);
+      toast(`🗑️ "${nome}" removido da vitrine.`);
+    });
+  });
+}
+
+function renderAdminSales(filter = "") {
+  const term = filter.toLowerCase();
+  const list = adminData.vendas.filter(v =>
+    !term ||
+    v.id.toLowerCase().includes(term) ||
+    v.cliente.toLowerCase().includes(term) ||
+    v.pagamento.toLowerCase().includes(term)
+  );
+  $("adminSalesTable").innerHTML = list.map((v, idx) => {
+    const realIdx = adminData.vendas.indexOf(v);
+    return `
+      <tr>
+        <td><b>${v.id}</b></td>
+        <td>${v.cliente}</td>
+        <td>${v.vendedor}</td>
+        <td><b>${v.valor}</b></td>
+        <td>${v.pagamento}</td>
+        <td>${v.data}</td>
+        <td>
+          <button class="btn-danger btn-sm" data-del-sale="${realIdx}">🗑️</button>
+        </td>
+      </tr>
+    `;
+  }).join("") || `<tr><td colspan="7" style="text-align:center;color:#64748b;">Nenhuma venda.</td></tr>`;
+
+  $("adminSalesTable").querySelectorAll("[data-del-sale]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const idx = parseInt(btn.dataset.delSale, 10);
+      if (!confirm("Excluir este registro de venda?")) return;
+      adminData.vendas.splice(idx, 1);
+      renderAdminTables();
+      toast("Registro de venda removido.");
+    });
+  });
+}
+
+function renderAdminClients(filter = "") {
+  const term = filter.toLowerCase();
+  const list = adminData.clientes.filter(c =>
+    !term ||
+    c.nome.toLowerCase().includes(term) ||
+    c.email.toLowerCase().includes(term) ||
+    c.cpf.includes(term)
+  );
+  $("adminClientsTable").innerHTML = list.map(c => {
+    const realIdx = adminData.clientes.indexOf(c);
+    return `
+      <tr>
+        <td><b>${c.nome}</b></td>
+        <td>${c.email}</td>
+        <td>${c.cpf}</td>
+        <td>${c.fone}</td>
+        <td>
+          <button class="btn-danger btn-sm" data-del-client="${realIdx}">🗑️ Remover</button>
+        </td>
+      </tr>
+    `;
+  }).join("") || `<tr><td colspan="5" style="text-align:center;color:#64748b;">Nenhum cliente.</td></tr>`;
+
+  $("adminClientsTable").querySelectorAll("[data-del-client]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const idx = parseInt(btn.dataset.delClient, 10);
+      const nome = adminData.clientes[idx]?.nome || "Cliente";
+      if (!confirm(`Remover cliente "${nome}"?`)) return;
+      adminData.clientes.splice(idx, 1);
+      renderAdminClients($("adminClientsSearch").value);
+      updateAdminStats();
+      toast(`Cliente "${nome}" removido.`);
+    });
+  });
+}
+
+function renderAdminSellers(filter = "") {
+  const term = filter.toLowerCase();
+  const list = adminData.vendedores.filter(s =>
+    !term ||
+    s.nome.toLowerCase().includes(term) ||
+    s.email.toLowerCase().includes(term)
+  );
+  $("adminSellersTable").innerHTML = list.map(s => {
+    const realIdx = adminData.vendedores.indexOf(s);
+    return `
+      <tr>
+        <td><b>${s.nome}</b></td>
+        <td>${s.email}</td>
+        <td>${s.doc}</td>
+        <td><b>${s.totalVendas}</b></td>
+        <td>
+          <button class="btn-danger btn-sm" data-del-seller="${realIdx}">🗑️ Remover</button>
+        </td>
+      </tr>
+    `;
+  }).join("") || `<tr><td colspan="5" style="text-align:center;color:#64748b;">Nenhum vendedor.</td></tr>`;
+
+  $("adminSellersTable").querySelectorAll("[data-del-seller]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const idx = parseInt(btn.dataset.delSeller, 10);
+      const nome = adminData.vendedores[idx]?.nome || "Vendedor";
+      if (!confirm(`Remover vendedor "${nome}"?`)) return;
+      adminData.vendedores.splice(idx, 1);
+      renderAdminSellers($("adminSellersSearch").value);
+      updateAdminStats();
+      toast(`Vendedor "${nome}" removido.`);
+    });
+  });
+}
+
+// Abas do admin
+document.querySelectorAll("[data-admin-tab]").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll("[data-admin-tab]").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+    document.querySelectorAll(".admin-panel").forEach(p => p.classList.remove("active"));
+    const panel = $("adminPanel" + tab.dataset.adminTab.charAt(0).toUpperCase() + tab.dataset.adminTab.slice(1));
+    if (panel) panel.classList.add("active");
+  });
+});
+
+$("adminProductSearch")?.addEventListener("input", (e) => renderAdminProducts(e.target.value));
+$("adminSalesSearch")?.addEventListener("input", (e) => renderAdminSales(e.target.value));
+$("adminClientsSearch")?.addEventListener("input", (e) => renderAdminClients(e.target.value));
+$("adminSellersSearch")?.addEventListener("input", (e) => renderAdminSellers(e.target.value));
+$("adminRefreshProducts")?.addEventListener("click", () => {
+  renderAdminProducts($("adminProductSearch").value);
+  updateAdminStats();
+  toast("Lista de produtos atualizada.");
+});
+
+$("adminPanelBtn").addEventListener("click", () => {
+  if(isAdminLoggedIn) {
+    renderAdminTables();
+    $("adminModal").classList.add("show");
+  } else {
+    toast("Acesso não autorizado!");
+  }
+});
+
+/* RENDERIZAÇÃO DA VITRINE COM FILTROS E ORDENAÇÃO */
+function renderProducts(filterCategory = "Todos", searchTerm = "", sortOption = "featured") {
+  const grid = $("productsGrid");
+  
+  let keys = Object.keys(products).filter(id => {
+    const p = products[id];
+    const matchesCategory = filterCategory === "Todos" || p.category === filterCategory;
+    const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  // Ordenação
+  if (sortOption === "price-asc") {
+    keys.sort((a, b) => products[a].price - products[b].price);
+  } else if (sortOption === "price-desc") {
+    keys.sort((a, b) => products[b].price - products[a].price);
+  } else if (sortOption === "rating") {
+    keys.sort((a, b) => products[b].rating - products[a].rating);
+  }
+
+  if (keys.length === 0) {
+    grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #64748b; padding: 40px;">Nenhum produto encontrado.</p>`;
+    return;
+  }
+
+  grid.innerHTML = keys.map(id => {
+    const p = products[id];
+    return `
+      <div class="card" data-product="${id}">
+        <div class="img-container" data-detail="${id}">
+          <img class="product-image" src="${p.image}" alt="${p.name}">
+          <span class="tag-condition">${p.condition}</span>
+        </div>
+        <div class="card-body">
+          <h3>${p.name}</h3>
+          <div class="rating">★ ${p.rating} <span>(${p.reviews})</span></div>
+          <div class="price-row">
+            <div class="price">${money(p.price)}</div>
+            <div class="old-price">${money(p.oldPrice)}</div>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="primary add" data-add="${id}">🛒 Adicionar</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  // Eventos de adicionar ao carrinho
+  grid.querySelectorAll("[data-add]").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      addToCart(btn.dataset.add);
+    });
+  });
+
+  // Clique na imagem abre o detalhe / descrição
+  grid.querySelectorAll("[data-detail]").forEach(el => {
+    el.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openProductDetail(el.dataset.detail);
+    });
+  });
+}
+
+// Filtro por categorias
+document.querySelectorAll(".category").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".category").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentCategory = btn.dataset.category;
+    renderProducts(currentCategory, $("search").value, $("sortSelect").value);
+  });
+});
+
+// Busca dinâmica
+$("search").addEventListener("input", (e) => {
+  renderProducts(currentCategory, e.target.value, $("sortSelect").value);
+});
+
+// Ordenação dinâmica
+$("sortSelect").addEventListener("change", (e) => {
+  renderProducts(currentCategory, $("search").value, e.target.value);
+});
+
+$("loginBtn").addEventListener("click", () => {
+  if(isAdminLoggedIn) {
+    $("adminModal").classList.add("show");
+  } else {
+    $("loginModal").classList.add("show");
+  }
+});
+
+document.querySelectorAll("[data-close]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const m = $(btn.dataset.close);
+    if(m) m.classList.remove("show");
+  });
+});
+
+// Fechar modal clicando no overlay
+document.querySelectorAll(".overlay").forEach(overlay => {
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove("show");
+    }
+  });
+});
+
+/* ========== VENDER PRODUTO ========== */
+const DEFAULT_SELL_IMAGES = {
+  "Eletrônicos": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=900&q=85",
+  "Calçados": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85",
+  "Games": "https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=900&q=85",
+  "Bicicletas": "https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=900&q=85",
+  "Outros": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85"
+};
+
+$("sellBtn").addEventListener("click", () => {
+  $("sellModal").classList.add("show");
+});
+
+$("sellSubmit").addEventListener("click", () => {
+  const name = $("sellName").value.trim();
+  const category = $("sellCategory").value;
+  const condition = $("sellCondition").value;
+  const price = parseFloat($("sellPrice").value);
+  const oldPriceRaw = parseFloat($("sellOldPrice").value);
+  const image = $("sellImage").value.trim();
+  const desc = $("sellDesc").value.trim();
+
+  if (!name || !category || !condition || !price || price <= 0) {
+    toast("⚠️ Preencha nome, categoria, condição e preço válido!");
+    return;
+  }
+
+  const oldPrice = (!isNaN(oldPriceRaw) && oldPriceRaw > price) ? oldPriceRaw : price * 1.4;
+  const newId = String(Date.now());
+
+  products[newId] = {
+    name,
+    price,
+    oldPrice,
+    category,
+    condition,
+    rating: 5.0,
+    reviews: 0,
+    image: image || DEFAULT_SELL_IMAGES[category] || DEFAULT_SELL_IMAGES["Outros"],
+    desc: desc || ""
+  };
+
+  // Limpa formulário
+  $("sellName").value = "";
+  $("sellCategory").value = "";
+  $("sellCondition").value = "";
+  $("sellPrice").value = "";
+  $("sellOldPrice").value = "";
+  $("sellImage").value = "";
+  $("sellDesc").value = "";
+
+  $("sellModal").classList.remove("show");
+
+  // Atualiza vitrine e foca na categoria do produto
+  currentCategory = "Todos";
+  document.querySelectorAll(".category").forEach(b => {
+    b.classList.toggle("active", b.dataset.category === "Todos");
+  });
+  renderProducts("Todos", "", $("sortSelect").value);
+
+  toast(`✅ "${name}" publicado com sucesso!`);
+});
+
+renderProducts();
+updateCartBadge();
+})();
+</script>
+
+</body>
+</html>
+EcoShop Sustainable Marketplace UI - Grok
+Exibindo ecoshop.html…
