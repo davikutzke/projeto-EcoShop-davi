@@ -434,7 +434,7 @@ function isValidCpf(cpf) {
   return rev === parseInt(d.charAt(10), 10);
 }
 
-function markError(el, on) {
+function markError(el, on) {https://images.unsplash.com/photo-1580481072645-022f9a6d8310?auto=format&fit=crop&w=900&q=8
   if (!el) return;
   if (on) el.classList.add("field-error");
   else el.classList.remove("field-error");
@@ -446,7 +446,7 @@ const SEED_PRODUCTS = {
   "3": { name: "Controle Wireless Xbox Series", price: 189.90, oldPrice: 350.00, category: "Games", condition: "Seminovo", rating: 4.9, reviews: 45, image: "https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=900&q=85" },
   "4": { name: "Bicicleta Urbana Retrô 7V", price: 699.90, oldPrice: 1100.00, category: "Bicicletas", condition: "Usado - Excelente", rating: 4.6, reviews: 12, image: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=900&q=85" },
   "5": { name: "Monitor Gamer LED 24\" 144Hz", price: 849.00, oldPrice: 1299.00, category: "Eletrônicos", condition: "Seminovo", rating: 4.9, reviews: 28, image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=900&q=85" },
-  "6": { name: "Jaqueta Jeans Vintage Eco", price: 159.90, oldPrice: 280.00, category: "Outros", condition: "Usado - Bom", rating: 4.5, reviews: 14, image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=900&q=85" },
+  "6": { name: "Calça Jeans Vintage Eco", price: 159.90, oldPrice: 280.00, category: "Outros", condition: "Usado - Bom", rating: 4.5, reviews: 14, image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=900&q=85" },
   "7": { name: "Câmera Mirrorless 4K Compacta", price: 2199.00, oldPrice: 3400.00, category: "Eletrônicos", condition: "Seminovo", rating: 5.0, reviews: 9, image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=900&q=85" },
   "8": { name: "Skate Longboard Bamboo Pro", price: 249.90, oldPrice: 420.00, category: "Outros", condition: "Usado - Excelente", rating: 4.8, reviews: 22, image: "https://images.unsplash.com/photo-1547447134-cd3f5c716030?auto=format&fit=crop&w=900&q=85" },
   "9": { name: "Headset Bluetooth Noise Cancelling", price: 320.00, oldPrice: 580.00, category: "Eletrônicos", condition: "Seminovo", rating: 4.7, reviews: 37, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=85" },
@@ -454,7 +454,7 @@ const SEED_PRODUCTS = {
   "11": { name: "Smartphone EcoTalk 128GB OLED", price: 1899.00, oldPrice: 2800.00, category: "Eletrônicos", condition: "Seminovo", rating: 4.9, reviews: 41, image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=85" },
   "12": { name: "Violão Acústico Nylon Vintage", price: 380.00, oldPrice: 650.00, category: "Outros", condition: "Usado - Bom", rating: 4.6, reviews: 16, image: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=900&q=85" },
   "13": { name: "Smartwatch Fitness Pulse HR", price: 299.00, oldPrice: 499.00, category: "Eletrônicos", condition: "Seminovo", rating: 4.7, reviews: 29, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=85" },
-  "14": { name: "Cadeira Ergonômica de Escritório", price: 450.00, oldPrice: 890.00, category: "Outros", condition: "Usado - Excelente", rating: 4.8, reviews: 19, image: "https://images.unsplash.com/photo-1580481072645-022f9a6d8310?auto=format&fit=crop&w=900&q=85" },
+  "14": { name: "Cadeira Ergonômica de Escritório", price: 450.00, oldPrice: 890.00, category: "Outros", condition: "Usado - Excelente", rating: 4.8, reviews: 19, image: "https://www.google.com/imgres?q=cadeira%20ergonomica&imgurl=https%3A%2F%2Fwww.comfy.com.br%2Fmedia%2Fcatalog%2Fproduct%2Fc%2Fa%2Fcadeira_ergon_mica_comfy_stance_plus_v2_2_.jpg&imgrefurl=https%3A%2F%2Fwww.comfy.com.br%2Fcadeira-de-escritorio-comfy-stance-plus-tela-mesh-preta-base-giratoria-e-sistema-relax.html%3Fsrsltid%3DAYCX9vKITcYh1kLOemAKSLw-hjHe3KMdhNMQ_vNcNtHboJfMHg7keq8l&docid=s87zl4teJhzsGM&tbnid=kF7xMbKUUCuC0M&vet=12ahUKEwjgnZCduf2XAxUPmpUCHSzoK5IQnPAOegUI2AEQAA..i&w=2000&h=2000&hcb=2&itg=1&ved=2ahUKEwjgnZCduf2XAxUPmpUCHSzoK5IQnPAOegUI2AEQAA" },
   "15": { name: "Tablet Stylus Pen 10.5\"", price: 920.00, oldPrice: 1450.00, category: "Eletrônicos", condition: "Seminovo", rating: 4.8, reviews: 23, image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=900&q=85" },
   "16": { name: "Patinete Elétrico Dobrável 250W", price: 1250.00, oldPrice: 1990.00, category: "Bicicletas", condition: "Usado - Excelente", rating: 4.7, reviews: 15, image: "https://images.unsplash.com/photo-1597082683410-11254b4d4202?auto=format&fit=crop&w=900&q=85" },
   "17": { name: "Bota Couro Ecológico Outdoor", price: 289.90, oldPrice: 420.00, category: "Calçados", condition: "Seminovo", rating: 4.9, reviews: 31, image: "https://images.unsplash.com/photo-1520639888713-7851133b1ed0?auto=format&fit=crop&w=900&q=85" },
